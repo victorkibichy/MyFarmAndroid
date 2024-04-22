@@ -94,7 +94,7 @@ fun ForgotPasswordScreen(navController: NavController) {
 
                     Spacer(modifier = Modifier.height(24.dp))
                     Button(
-                        onClick = {navController.navigate("login-page")
+                        onClick = {navController.navigate("login_page")
                         },
                         modifier = Modifier.fillMaxWidth()
                     ) {

@@ -54,7 +54,12 @@ class MainActivity : ComponentActivity() {
                 composable("farmTechPage"){
                     FarmTechPage(navController)
                 }
-
+                composable("create_password"){
+                    CreatePasswordScreen(navController)
+                }
+                composable("login_page"){
+                    LoginForgotPasswordPage(navController)
+                }
             }
         }
     }

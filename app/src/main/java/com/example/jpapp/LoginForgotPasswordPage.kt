@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,8 +15,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
-@Composable
-fun LoginPage(navController: NavController, isResettingPassword: Boolean = false) {
+    @Composable
+    fun LoginForgotPasswordPage(navController: NavController, isResettingPassword: Boolean = false) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -34,16 +32,9 @@ fun LoginPage(navController: NavController, isResettingPassword: Boolean = false
             PasswordField()
             Spacer(modifier = Modifier.height(16.dp))
             LoginButton(onClick = {
-                navController.navigate("dashboard")
-            })
-            Spacer(modifier = Modifier.height(8.dp))
-            SignupButton(onSignupClick = { navController.navigate("registration") })
-            Text(
-                "Forgot Password?",
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.clickable {
-                    navController.navigate("forgot_password")
-                }
+                navController.navigate("create_password")
+            }
             )
         }
     }
+

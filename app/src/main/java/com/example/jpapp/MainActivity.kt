@@ -42,7 +42,6 @@ class MainActivity : ComponentActivity() {
                     MyFarmScreen()
                 }
                 composable("my_market") {
-
                     MyMarketPage(navController = navController)
                 }
                 composable("newFarmProduce") {
@@ -59,6 +58,9 @@ class MainActivity : ComponentActivity() {
                 }
                 composable("login_page"){
                     LoginForgotPasswordPage(navController)
+                }
+                composable("transportScreen"){
+                    TransportScreen(navController = navController)
                 }
             }
         }
@@ -116,12 +118,12 @@ fun SignupButton(onSignupClick: () -> Unit, text: String = "Do you have an accou
 @Composable
 fun MainRoleSpinner() {
     val roles = listOf("Farmer", "Agro Dealer", "Transporter", "Buyer", "Service Provider")
-    var selectedRoleIndex by remember { return@remember mutableStateOf(0) }
+    val selectedRoleIndex by remember { return@remember mutableStateOf(0) }
 
     Column(modifier = Modifier.padding(horizontal = 16.dp)) {
         Text(text = "Select Main Role")
         Spacer(modifier = Modifier.height(8.dp))
-        androidx.compose.material3.TextField(
+        TextField(
                 value = roles[selectedRoleIndex],
                 onValueChange = { /* Handle value change */ },
                 readOnly = true,

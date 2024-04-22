@@ -131,6 +131,7 @@ fun DashboardCard(title: String, navController: NavController, imageResource: In
                 "My Farm" -> navController.navigate("survey123_login")
                 "Produce" -> navController.navigate("my_market")
                 "Farm Tech" -> navController.navigate("FarmTechPage")
+                "Transport" -> navController.navigate("TransportScreen")
             }
         }
     ) {

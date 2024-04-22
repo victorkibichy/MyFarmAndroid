@@ -12,12 +12,12 @@ import androidx.navigation.NavController
     @Composable
     fun NavController.ToolsTabContent() {
         val toolImages = listOf(
-            R.drawable.farm_image_3,
-            R.drawable.farm_image_3,
-            R.drawable.farm_image_3,
-            R.drawable.farm_image_3,
-            R.drawable.farm_image_3,
-            R.drawable.farm_image_3,
+            R.drawable.farm_image_2,
+            R.drawable.farm_image_2,
+            R.drawable.farm_image_2,
+            R.drawable.farm_image_2,
+            R.drawable.farm_image_2,
+            R.drawable.farm_image_2,
 
             // Add more tool images here
         )
@@ -27,7 +27,12 @@ import androidx.navigation.NavController
             columns = GridCells.Adaptive(minSize = 128.dp)
         ) {
             items(toolImages) { toolImage ->
-                ToolCard(imageResource = toolImage)
+                ToolCard(
+                    imageResource = R.drawable.farm_image_2,
+                    toolName = "wheelbarrow",
+                    sellerName = "four farmers ltd",
+                    price = "sh 1000",
+                    availability = "In Stock")
             }
         }
     }

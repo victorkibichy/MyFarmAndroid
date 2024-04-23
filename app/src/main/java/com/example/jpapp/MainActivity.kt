@@ -2,6 +2,7 @@
 
 package com.example.jpapp
 
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.WebView
@@ -49,7 +50,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -67,6 +67,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import java.time.LocalDate
+import androidx.compose.ui.Alignment
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,6 +97,10 @@ class MainActivity : ComponentActivity() {
                 composable("newFarmProduce") {
                     NewFarmProduceScreen(navController = navController)
                 }
+                composable("support") {
+                    SupportScreen(navController)
+                }
+
             }
         }
     }
@@ -419,6 +424,7 @@ fun DashboardPage(navController: NavController) {
 
         // Add the Grid of Cards
         GridOfCards(navController)
+
     }
 }
 
@@ -468,6 +474,8 @@ fun DashboardCard(title: String, navController: NavController, imageResource: In
                 when (title) {
                     "My Farm" -> navController.navigate("survey123_login")
                     "Produce" -> navController.navigate("my_market")
+                    "Support" -> navController.navigate("support")
+
                 }
             }
     ) {

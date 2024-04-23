@@ -41,10 +41,10 @@ class MainActivity : ComponentActivity() {
                     DashboardPage(navController)
                 }
                 composable("myFarm") {
-                    MyFarmScreen()
+                    MyFarmScreen(navController)
                 }
                 composable("survey123_login") {
-                    MyFarmScreen()
+                    MyFarmScreen(navController)
                 }
                 composable("my_market") {
                     MyMarketPage(navController = navController)

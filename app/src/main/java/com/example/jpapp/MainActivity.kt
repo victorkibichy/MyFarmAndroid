@@ -23,17 +23,20 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -75,9 +78,18 @@ class MainActivity : ComponentActivity() {
                 composable("drawerMenu") {
                     DrawerMenuScreen(navController)
                 }
+                composable("forgot_password") {
+                    ForgotPasswordPage(navController)
+                }
+                composable("farmTech"){
+                    FarmTechPage(navController)
+                }
+
             }
         }
     }
+
+   
 }
 
 @Composable
@@ -102,6 +114,13 @@ fun LoginPage(navController: NavController) {
         })
         Spacer(modifier = Modifier.height(8.dp))
         SignupButton(onSignupClick = { navController.navigate("registration") })
+        Text(
+            "Forgot Password?",
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.clickable {
+                navController.navigate("forgot_password")
+            }
+        )
     }
 }
 
@@ -242,6 +261,7 @@ fun RegistrationPage(onBackPressed: () -> Unit) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UsernameField() {
     TextField(
@@ -265,6 +285,82 @@ fun PasswordField() {
             colors = TextFieldDefaults.colors()
     )
 }
+@Composable
+fun ForgotPasswordPage(navController: NavController) {
+    // State for the email input
+    var email by remember { mutableStateOf("") }
+    // State for showing feedback to the user (success or error message)
+    var feedbackMessage by remember { mutableStateOf<String?>(null) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Title
+        Text(
+            text = "Forgot Password",
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        // Email input field
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email Address") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Button to send password reset link
+        Button(
+            onClick = {
+                // Handle password reset logic here
+                if (email.isNotEmpty()) {
+                    // Simulate password reset request
+                    // You may replace this with actual password reset logic
+                    feedbackMessage = "Password reset link sent to your email address!"
+                } else {
+                    feedbackMessage = "Please enter a valid email address."
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Send Password Reset Link")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Display feedback message to the user (success or error)
+        feedbackMessage?.let { message ->
+            Text(
+                text = message,
+                color = if (message.contains("sent")) Color.Green else Color.Red,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+        }
+
+        // Back to login button
+        Button(
+            onClick = {
+                navController.navigate("login") {
+                    popUpTo("forgot_password") { inclusive = true }
+                }
+            },
+            modifier = Modifier
+                .padding(top = 16.dp)
+                .fillMaxWidth()
+        ) {
+            Text("Back to Login")
+        }
+    }
+}
+
 
 @Composable
 fun LoginButton(onClick: () -> Unit) {
@@ -414,6 +510,7 @@ fun DashboardPage(navController: NavController) {
 
 
 
+
 @Composable
 fun GridOfCards(navController: NavController) {
     val cardTitles = listOf(
@@ -449,6 +546,7 @@ fun GridOfCards(navController: NavController) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardCard(title: String, navController: NavController, imageResource: Int) {
     Card(
@@ -460,6 +558,7 @@ fun DashboardCard(title: String, navController: NavController, imageResource: In
                 when (title) {
                     "My Farm" -> navController.navigate("survey123_login")
                     "Produce" -> navController.navigate("my_market")
+                    "Farm Tech" -> navController.navigate("FarmTechPage")
                 }
             }
     ) {
@@ -487,6 +586,90 @@ fun DashboardCard(title: String, navController: NavController, imageResource: In
         }
     }
 }
+@Composable
+fun FarmTechPage(navController: NavHostController) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Farm Tech") },
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { /* Add new farming technology action */ },
+                content = { Icon(Icons.Default.Add, contentDescription = "Add") }
+            )
+        }
+    ) { paddingValues ->
+        LazyColumn(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize(),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            item {
+                FarmingTechCard(
+                    imagePainter = painterResource(id = R.drawable.tractor),
+                    title = "Smart Tractor",
+                    description = "A smart tractor with GPS and autonomous driving capabilities for efficient farming."
+                )
+            }
+            item {
+                FarmingTechCard(
+                    imagePainter = painterResource(id = R.drawable.irrigation),
+                    title = "Advanced Irrigation System",
+                    description = "An advanced irrigation system that uses sensors to optimize water usage."
+                )
+            }
+            // Add more FarmingTechCard instances as needed
+        }
+    }
+}
+
+@Composable
+fun FarmingTechCard(
+    imagePainter: Painter,
+    title: String,
+    description: String
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
+            .clip(MaterialTheme.shapes.medium),
+        elevation = CardDefaults.elevation(4.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Image(
+                painter = imagePainter,
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(180.dp)
+                    .clip(MaterialTheme.shapes.medium)
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodyMedium.copy(textAlign = TextAlign.Justify)
+            )
+        }
+    }
+}
+
+private fun CardDefaults.elevation(dp: Dp): CardElevation {
+    TODO("Not yet implemented")
+}
+
+
 @Composable
 fun MyFarmScreen() {
     val url = "https://www.arcgis.com/sharing/rest/oauth2/authorize?client_id=survey123hub&display=default&redirect_uri=https%3A%2F%2Fsurvey123.arcgis.com%2Fsurveys&parent=https://survey123.arcgis.com&locale=en&response_type=token&expiration=720"
@@ -557,6 +740,7 @@ fun DrawerMenuItem(text: String, onClick: () -> Unit) {
             modifier = Modifier.clickable(onClick = onClick)
     )
 }
+
 @Composable
 fun MyMarketPage(navController: NavController) {
     LazyColumn(

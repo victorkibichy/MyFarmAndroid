@@ -12,10 +12,15 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -42,7 +47,6 @@ class MainActivity : ComponentActivity() {
                     MyFarmScreen()
                 }
                 composable("my_market") {
-
                     MyMarketPage(navController = navController)
                 }
                 composable("newFarmProduce") {
@@ -59,6 +63,12 @@ class MainActivity : ComponentActivity() {
                 }
                 composable("login_page"){
                     LoginForgotPasswordPage(navController)
+                }
+                composable("drawerMenu"){
+                    DrawerMenuScreen(navController)
+                }
+                composable("support"){
+                    SupportScreen(navController)
                 }
             }
         }
@@ -161,4 +171,60 @@ fun DropdownMenuItem(
 @Composable
 fun TaskItem(text: String) {
     // Placeholder for TaskItem
+}
+@Composable
+fun DrawerMenuScreen(navController: NavController) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(50.dp)
+
+    ) {
+        // Title with profile icon
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.clickable {
+                // Handle profile click action (you can customize this action)
+                // Example: navController.navigate("update_profile")
+                navController.navigate("update_profile")
+            }
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.profile_icon),
+                contentDescription = "Update Profile",
+                modifier = Modifier
+                    .size(50.dp)
+            )
+            Text("my profile", )
+        }
+
+        // Menu items
+        Spacer(modifier = Modifier.height(32.dp))
+        DrawerMenuItem(text = "Home") {
+            navController.navigate("dashboard")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        DrawerMenuItem(text = "My Account") {
+            navController.navigate("my_account")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        DrawerMenuItem(text = "Settings") {
+            navController.navigate("settings")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        DrawerMenuItem(text = "Logout") {
+            navController.navigate("login")
+        }
+    }
+}
+
+@Composable
+fun DrawerMenuItem(text: String, onClick: () -> Unit) {
+    Text(
+        text = text,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier.clickable(onClick = onClick)
+    )
 }

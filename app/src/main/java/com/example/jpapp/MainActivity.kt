@@ -17,8 +17,14 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -66,6 +72,9 @@ class MainActivity : ComponentActivity() {
                 composable("newFarmProduce") {
                     NewFarmProduceScreen(navController = navController)
                 }
+                composable("drawerMenu") {
+                    DrawerMenuScreen(navController)
+                }
             }
         }
     }
@@ -96,6 +105,7 @@ fun LoginPage(navController: NavController) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegistrationPage(onBackPressed: () -> Unit) {
     var termsChecked by remember { mutableStateOf(false) } // State for checkbox
@@ -309,6 +319,7 @@ fun MainRoleSpinner() {
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardPage(navController: NavController) {
     Column(
@@ -356,10 +367,52 @@ fun DashboardPage(navController: NavController) {
                 }
         )
 
+
         // Add the Grid of Cards
         GridOfCards(navController)
+        Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally
+        )
+        {
+            BottomAppBar(contentColor = Color.Black,)
+            {
+                Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                )
+                {
+                    // Put your content here, like buttons or icons
+                    IconButton(onClick = {}) {
+                        Icon(imageVector = Icons.Default.Home, contentDescription = "Home")
+                    }
+                    IconButton(onClick = {}) {
+                        Icon(imageVector = Icons.Default.Favorite, contentDescription = "Favorite")
+                    }
+
+                IconButton(onClick = {}) {
+                    Icon(
+                            imageVector = Icons.Default.ShoppingCart,
+                            contentDescription = "ShoppingCart"
+                    )
+                }
+
+                IconButton(onClick = {}) {
+                    Icon(imageVector = Icons.Default.Person, contentDescription = "Profile")
+                }
+                    IconButton(onClick = {}) {
+                    Icon(imageVector = Icons.Default.List, contentDescription = "Markertplace")
+                }
+            }
+        }
+
     }
 }
+}
+
+
 
 @Composable
 fun GridOfCards(navController: NavController) {
@@ -447,6 +500,61 @@ fun MyFarmScreen() {
                     loadUrl(url)
                 }
             }
+    )
+}@Composable
+fun DrawerMenuScreen(navController: NavController) {
+    Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(50.dp)
+
+    ) {
+        // Title with profile icon
+        Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.clickable {
+                    // Handle profile click action (you can customize this action)
+                    // Example: navController.navigate("update_profile")
+                    navController.navigate("update_profile")
+                }
+        ) {
+            Icon(
+                    painter = painterResource(id = R.drawable.profile_icon),
+                    contentDescription = "Update Profile",
+                    modifier = Modifier
+                        .size(50.dp)
+            )
+            Text("my profile", )
+        }
+
+        // Menu items
+        Spacer(modifier = Modifier.height(32.dp))
+        DrawerMenuItem(text = "Home") {
+            navController.navigate("dashboard")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        DrawerMenuItem(text = "My Account") {
+            navController.navigate("my_account")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        DrawerMenuItem(text = "Settings") {
+            navController.navigate("settings")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        DrawerMenuItem(text = "Logout") {
+            navController.navigate("login")
+        }
+    }
+}
+
+@Composable
+fun DrawerMenuItem(text: String, onClick: () -> Unit) {
+    Text(
+            text = text,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.clickable(onClick = onClick)
     )
 }
 @Composable

@@ -12,6 +12,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -24,7 +25,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ToolCard(imageResource: Int) {
+fun ToolCard(
+    imageResource: Int,
+    toolName: String,
+    sellerName: String,
+    price: String,
+    availability: String
+){
     Card(
         modifier = Modifier
             .padding(8.dp)
@@ -46,7 +53,29 @@ fun ToolCard(imageResource: Int) {
             )
 
             Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = toolName,
+                style = MaterialTheme.typography.h6,
+                modifier = Modifier.fillMaxWidth()
+            )
 
+            Text(
+                text = "Seller: $sellerName",
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Text(
+                text = "Price: $price",
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Text(
+                text = "Availability: $availability",
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier.fillMaxWidth()
+            )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth(),

@@ -26,7 +26,13 @@ import androidx.navigation.NavController
             columns = GridCells.Adaptive(minSize = 128.dp)
         ) {
             items(machineryImages) { machineryImage ->
-                MachineryCard(imageResource = machineryImage)
+                MachineryCard(
+                    imageResource = R.drawable.farm_image_1,
+                    machineName = "Tractor",
+                    sellerName = "four farmers ltd",
+                    price = "sh 1000",
+                    availability = "In Stock"
+                )
             }
         }
     }

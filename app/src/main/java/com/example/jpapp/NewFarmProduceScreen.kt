@@ -31,29 +31,32 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-    fun NewFarmProduceScreen(navController: NavController) {
+fun NewFarmProduceScreen(navController: NavController) {
         LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+
         ) {
             // Add a top app bar with "New Farm Produce" heading
             item {
                 TopAppBar(
-                        title = {
-                            Text(text = "New Farm Produce")
-                        },
-                        modifier = Modifier.padding(top = 0.dp)
+                    title = {
+                        Text(text = "New Farm Produce")
+                    },
+                    modifier = Modifier.padding(top = 0.dp)
+
                 )
             }
 
             // Add "Select Category" dropdown menu
             item {
                 Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp)
-                            .padding(horizontal = 16.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .padding(horizontal = 16.dp)
+
                 ) {
                     var expandedCategory by remember { mutableStateOf(false) }
                     var selectedCategory by remember { mutableStateOf("Select Category") }
@@ -62,9 +65,10 @@ import androidx.navigation.NavController
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(selectedCategory, Modifier.weight(1f))
                         Icon(
-                                imageVector = Icons.Default.ArrowDropDown,
-                                contentDescription = "Dropdown Icon",
-                                modifier = Modifier.clickable(onClick = { expandedCategory = !expandedCategory })
+                            imageVector = Icons.Default.ArrowDropDown,
+                            contentDescription = "Dropdown Icon",
+                            modifier = Modifier.clickable(onClick = { expandedCategory = !expandedCategory })
+
                         )
                     }
                     Spacer(modifier = Modifier.height(8.dp))
@@ -72,19 +76,20 @@ import androidx.navigation.NavController
                     // Category Dropdown menu implementation
                     if (expandedCategory) {
                         DropdownMenu(
-                                expanded = expandedCategory,
-                                onDismissRequest = { expandedCategory = false },
-                                modifier = Modifier.fillMaxWidth()
+                            expanded = expandedCategory,
+                            onDismissRequest = { expandedCategory = false },
+                            modifier = Modifier.fillMaxWidth()
+
                         ) {
                             // Displaying categories
                             categories.forEach { category ->
                                 DropdownMenuItem(
-                                        onClick = {
-                                            selectedCategory = category
-                                            expandedCategory = false
-                                        },
-                                        text = category
-                                )
+                                    onClick = {
+                                        selectedCategory = category
+                                        expandedCategory = false
+                                    },
+                                    text = category
+                   )
                             }
                         }
                     }
@@ -94,10 +99,10 @@ import androidx.navigation.NavController
             // Add "Select Product" dropdown menu
             item {
                 Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp)
-                            .padding(horizontal = 16.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .padding(horizontal = 16.dp)
                 ) {
                     var expandedProduct by remember { mutableStateOf(false) }
                     var selectedProduct by remember { mutableStateOf("Select Product") }
@@ -106,9 +111,9 @@ import androidx.navigation.NavController
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(selectedProduct, Modifier.weight(1f))
                         Icon(
-                                imageVector = Icons.Default.ArrowDropDown,
-                                contentDescription = "Dropdown Icon",
-                                modifier = Modifier.clickable(onClick = { expandedProduct = !expandedProduct })
+                            imageVector = Icons.Default.ArrowDropDown,
+                            contentDescription = "Dropdown Icon",
+                            modifier = Modifier.clickable(onClick = { expandedProduct = !expandedProduct })
                         )
                     }
                     Spacer(modifier = Modifier.height(8.dp))
@@ -116,19 +121,18 @@ import androidx.navigation.NavController
                     // Product Dropdown menu implementation
                     if (expandedProduct) {
                         DropdownMenu(
-                                expanded = expandedProduct,
-                                onDismissRequest = { expandedProduct = false },
-                                modifier = Modifier.fillMaxWidth()
+                            expanded = expandedProduct,
+                            onDismissRequest = { expandedProduct = false },
+                            modifier = Modifier.fillMaxWidth()
                         ) {
                             // Displaying products
                             products.forEach { product ->
                                 DropdownMenuItem(
-                                        onClick = {
-                                            selectedProduct = product
-                                            expandedProduct = false
-                                        },
-                                        text = product
-                                )
+                                    onClick = {
+                                        selectedProduct = product
+                                        expandedProduct = false
+                                    },
+                                    text = product)
                             }
                         }
                     }
@@ -138,10 +142,10 @@ import androidx.navigation.NavController
             // Add "Select Unit of Measurement" dropdown menu
             item {
                 Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp)
-                            .padding(horizontal = 16.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .padding(horizontal = 16.dp)
                 ) {
                     var expandedUnit by remember { mutableStateOf(false) }
                     var selectedUnit by remember { mutableStateOf("Select Unit of Measurement") }
@@ -150,29 +154,29 @@ import androidx.navigation.NavController
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(selectedUnit, Modifier.weight(1f))
                         Icon(
-                                imageVector = Icons.Default.ArrowDropDown,
-                                contentDescription = "Dropdown Icon",
-                                modifier = Modifier.clickable(onClick = { expandedUnit = !expandedUnit })
-                        )
+                            imageVector = Icons.Default.ArrowDropDown,
+                            contentDescription = "Dropdown Icon",
+                            modifier = Modifier.clickable(onClick = { expandedUnit = !expandedUnit })
+                 )
                     }
                     Spacer(modifier = Modifier.height(8.dp))
 
                     // Unit of Measurement Dropdown menu implementation
                     if (expandedUnit) {
                         DropdownMenu(
-                                expanded = expandedUnit,
-                                onDismissRequest = { expandedUnit = false },
-                                modifier = Modifier.fillMaxWidth()
-                        ) {
+                            expanded = expandedUnit,
+                            onDismissRequest = { expandedUnit = false },
+                            modifier = Modifier.fillMaxWidth()
+                     ) {
                             // Displaying units of measurement
                             units.forEach { unit ->
                                 DropdownMenuItem(
-                                        onClick = {
-                                            selectedUnit = unit
-                                            expandedUnit = false
-                                        },
-                                        text = unit
-                                )
+                                    onClick = {
+                                        selectedUnit = unit
+                                        expandedUnit = false
+                                    },
+                                    text = unit
+                        )
                             }
                         }
                     }
@@ -182,19 +186,19 @@ import androidx.navigation.NavController
             // Add "Available Dates" text and text input
             item {
                 Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp)
-                            .padding(horizontal = 16.dp)
-                ) {
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .padding(horizontal = 16.dp)
+          ) {
                     Text("Available Dates")
                     Spacer(modifier = Modifier.height(8.dp))
                     // Text input for dates (placeholder)
                     TextField(
-                            value = "",
-                            onValueChange = { },
-                            label = { Text("Enter Date") },
-                            modifier = Modifier.fillMaxWidth()
+                        value = "",
+                        onValueChange = { },
+                        label = { Text("Enter Date") },
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
             }
@@ -202,59 +206,59 @@ import androidx.navigation.NavController
             // Add "Describe Location" text and text input
             item {
                 Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp)
-                            .padding(horizontal = 16.dp)
-                ) {
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .padding(horizontal = 16.dp)
+         ) {
                     Text("Describe Location")
                     Spacer(modifier = Modifier.height(8.dp))
                     // Text input for location description (placeholder)
                     TextField(
-                            value = "",
-                            onValueChange = { },
-                            label = { Text("Enter Location Description") },
-                            modifier = Modifier.fillMaxWidth()
-                    )
+                        value = "",
+                        onValueChange = { },
+                        label = { Text("Enter Location Description") },
+                        modifier = Modifier.fillMaxWidth()
+           )
                 }
             }
 
             // Add "Description" text and text input
             item {
                 Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp)
-                            .padding(horizontal = 16.dp)
-                ) {
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .padding(horizontal = 16.dp)
+            ) {
                     Text("Description")
                     Spacer(modifier = Modifier.height(8.dp))
                     // Text input for description (placeholder)
                     TextField(
-                            value = "",
-                            onValueChange = { },
-                            label = { Text("Enter Description") },
-                            modifier = Modifier.fillMaxWidth()
-                    )
+                        value = "",
+                        onValueChange = { },
+                        label = { Text("Enter Description") },
+                        modifier = Modifier.fillMaxWidth()
+              )
                 }
             }
 
             // Add "Price per Unit" text and text input
             item {
                 Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp)
-                            .padding(horizontal = 16.dp)
-                ) {
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .padding(horizontal = 16.dp)
+           ) {
                     Text("Price per Unit")
                     Spacer(modifier = Modifier.height(8.dp))
                     // Text input for price per unit (placeholder)
                     TextField(
-                            value = "",
-                            onValueChange = { },
-                            label = { Text("Enter Price per Unit") },
-                            modifier = Modifier.fillMaxWidth()
+                        value = "",
+                        onValueChange = { },
+                        label = { Text("Enter Price per Unit") },
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
             }
@@ -262,10 +266,11 @@ import androidx.navigation.NavController
             // Add "Next" button
             item {
                 Button(
-                        onClick = { /* Handle next button click */ },
-                        modifier = Modifier
-                            .padding(vertical = 16.dp)
-                            .fillMaxWidth()
+                    onClick = { /* Handle next button click */ },
+                    modifier = Modifier
+                        .padding(vertical = 16.dp)
+                        .fillMaxWidth()
+
                 ) {
                     Text(text = "Next")
                 }

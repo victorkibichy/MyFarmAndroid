@@ -28,11 +28,13 @@ fun LoginPage(navController: NavController, isResettingPassword: Boolean = false
                 painter = painterResource(id = R.drawable.equitylogo),
                 contentDescription = null,
                 modifier = Modifier.padding(vertical = 16.dp)
+
             )
             UsernameField()
             Spacer(modifier = Modifier.height(16.dp))
             PasswordField()
             Spacer(modifier = Modifier.height(16.dp))
+            // Login button with navigation
             LoginButton(onClick = {
                 navController.navigate("dashboard")
             })
@@ -47,3 +49,5 @@ fun LoginPage(navController: NavController, isResettingPassword: Boolean = false
             )
         }
     }
+
+

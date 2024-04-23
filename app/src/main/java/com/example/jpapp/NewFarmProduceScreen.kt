@@ -36,6 +36,7 @@ fun NewFarmProduceScreen(navController: NavController) {
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
+
         ) {
             // Add a top app bar with "New Farm Produce" heading
             item {
@@ -44,6 +45,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                         Text(text = "New Farm Produce")
                     },
                     modifier = Modifier.padding(top = 0.dp)
+
                 )
             }
 
@@ -54,6 +56,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
                         .padding(horizontal = 16.dp)
+
                 ) {
                     var expandedCategory by remember { mutableStateOf(false) }
                     var selectedCategory by remember { mutableStateOf("Select Category") }
@@ -65,6 +68,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                             imageVector = Icons.Default.ArrowDropDown,
                             contentDescription = "Dropdown Icon",
                             modifier = Modifier.clickable(onClick = { expandedCategory = !expandedCategory })
+
                         )
                     }
                     Spacer(modifier = Modifier.height(8.dp))
@@ -75,6 +79,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                             expanded = expandedCategory,
                             onDismissRequest = { expandedCategory = false },
                             modifier = Modifier.fillMaxWidth()
+
                         ) {
                             // Displaying categories
                             categories.forEach { category ->
@@ -84,7 +89,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                                         expandedCategory = false
                                     },
                                     text = category
-                                )
+                   )
                             }
                         }
                     }
@@ -127,8 +132,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                                         selectedProduct = product
                                         expandedProduct = false
                                     },
-                                    text = product
-                                )
+                                    text = product)
                             }
                         }
                     }
@@ -153,7 +157,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                             imageVector = Icons.Default.ArrowDropDown,
                             contentDescription = "Dropdown Icon",
                             modifier = Modifier.clickable(onClick = { expandedUnit = !expandedUnit })
-                        )
+                 )
                     }
                     Spacer(modifier = Modifier.height(8.dp))
 
@@ -163,7 +167,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                             expanded = expandedUnit,
                             onDismissRequest = { expandedUnit = false },
                             modifier = Modifier.fillMaxWidth()
-                        ) {
+                     ) {
                             // Displaying units of measurement
                             units.forEach { unit ->
                                 DropdownMenuItem(
@@ -172,7 +176,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                                         expandedUnit = false
                                     },
                                     text = unit
-                                )
+                        )
                             }
                         }
                     }
@@ -186,7 +190,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
                         .padding(horizontal = 16.dp)
-                ) {
+          ) {
                     Text("Available Dates")
                     Spacer(modifier = Modifier.height(8.dp))
                     // Text input for dates (placeholder)
@@ -206,7 +210,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
                         .padding(horizontal = 16.dp)
-                ) {
+         ) {
                     Text("Describe Location")
                     Spacer(modifier = Modifier.height(8.dp))
                     // Text input for location description (placeholder)
@@ -215,7 +219,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                         onValueChange = { },
                         label = { Text("Enter Location Description") },
                         modifier = Modifier.fillMaxWidth()
-                    )
+           )
                 }
             }
 
@@ -226,7 +230,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
                         .padding(horizontal = 16.dp)
-                ) {
+            ) {
                     Text("Description")
                     Spacer(modifier = Modifier.height(8.dp))
                     // Text input for description (placeholder)
@@ -235,7 +239,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                         onValueChange = { },
                         label = { Text("Enter Description") },
                         modifier = Modifier.fillMaxWidth()
-                    )
+              )
                 }
             }
 
@@ -246,7 +250,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                         .fillMaxWidth()
                         .padding(vertical = 16.dp)
                         .padding(horizontal = 16.dp)
-                ) {
+           ) {
                     Text("Price per Unit")
                     Spacer(modifier = Modifier.height(8.dp))
                     // Text input for price per unit (placeholder)
@@ -266,6 +270,7 @@ fun NewFarmProduceScreen(navController: NavController) {
                     modifier = Modifier
                         .padding(vertical = 16.dp)
                         .fillMaxWidth()
+
                 ) {
                     Text(text = "Next")
                 }

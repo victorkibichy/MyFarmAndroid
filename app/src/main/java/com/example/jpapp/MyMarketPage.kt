@@ -7,6 +7,19 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -23,7 +36,7 @@ fun MyMarketPage(navController: NavController) {
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+     ) {
             // Add a top app bar with "My Market" heading
             item {
                 TopAppBar(
@@ -31,6 +44,7 @@ fun MyMarketPage(navController: NavController) {
                         Text(text = "My Market")
                     },
                     modifier = Modifier.padding(top = 0.dp)
+
                 )
             }
 
@@ -42,7 +56,7 @@ fun MyMarketPage(navController: NavController) {
                     modifier = Modifier
                         .padding(vertical = 60.dp)
                         .size(400.dp)
-                )
+          )
             }
 
             // Add text below the image
@@ -60,7 +74,7 @@ fun MyMarketPage(navController: NavController) {
                         text = "Qty: 24kgs\nPrice: 135/kg\nAvailable Date: ${LocalDate.now()}",
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp
-                    )
+     )
                 }
             }
 

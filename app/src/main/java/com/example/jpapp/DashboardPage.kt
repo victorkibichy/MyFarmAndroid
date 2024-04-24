@@ -1,14 +1,7 @@
 package com.example.jpapp
+
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -17,15 +10,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -117,9 +102,10 @@ fun DashboardPage(navController: NavController) {
                     IconButton(onClick = {}) {
                         Icon(imageVector = Icons.Default.Person, contentDescription = "Profile")
                     }
-                    IconButton(onClick = {}) {
-                        Icon(imageVector = Icons.Default.List, contentDescription = "Markertplace")
+                    IconButton(onClick = { navController.navigate("MarketPlace") }) {
+                        Icon(imageVector = Icons.Default.List, contentDescription = "Marketplace")
                     }
+
                 }
             }
 
@@ -177,7 +163,9 @@ fun DashboardCard(title: String, navController: NavController, imageResource: In
                 "Produce" -> navController.navigate("my_market")
                 "Farm Tech" -> navController.navigate("FarmTechPage")
                 "Support" -> navController.navigate("support")
-
+                "Services" -> navController.navigate("ServicesPage")
+                "Farm Inputs" -> navController.navigate("FarmInputsPage")
+                "List Icon" -> navController.navigate("MarketPlace")
             }
         }
     ) {
@@ -185,12 +173,11 @@ fun DashboardCard(title: String, navController: NavController, imageResource: In
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
-
-
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Black // Set text color to black
             )
             Spacer(modifier = Modifier.height(8.dp))
             Image(
@@ -199,9 +186,7 @@ fun DashboardCard(title: String, navController: NavController, imageResource: In
                 modifier = Modifier
                     .width(120.dp)
                     .height(120.dp)
-
             )
-
         }
     }
 }

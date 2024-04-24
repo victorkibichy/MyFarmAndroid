@@ -2,16 +2,31 @@
 
 package com.example.jpapp
 
-import android.annotation.SuppressLint
+//noinspection UsingMaterialAndMaterial3Libraries
+import FarmInputsPage
+import ServicesPage
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.Text
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -70,9 +85,21 @@ class MainActivity : ComponentActivity() {
                 composable("support"){
                     SupportScreen(navController)
                 }
+                composable("ServicesPage"){
+                    ServicesPage(navController)
+
+                }
+                composable("FarmInputsPage"){
+                    FarmInputsPage(navController)
+                }
+                composable("MarketPlace"){
+                    Marketplace(navController)
+                }
             }
         }
     }
+
+
 
 }
 @Composable
@@ -122,37 +149,6 @@ fun SignupButton(onSignupClick: () -> Unit, text: String = "Do you have an accou
     }
 }
 
-@SuppressLint("AutoboxingStateCreation")
-@Composable
-fun MainRoleSpinner() {
-    val roles = listOf("Farmer", "Agro Dealer", "Transporter", "Buyer", "Service Provider")
-    var selectedRoleIndex by remember { return@remember mutableStateOf(0) }
-
-    Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-        Text(text = "Select Main Role")
-        Spacer(modifier = Modifier.height(8.dp))
-        androidx.compose.material3.TextField(
-                value = roles[selectedRoleIndex],
-                onValueChange = { /* Handle value change */ },
-                readOnly = true,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp)
-        )
-        androidx.compose.material3.DropdownMenu(
-                expanded = false,
-                onDismissRequest = { },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp)
-        ) {
-            roles.forEachIndexed { index, role ->
-
-            }
-        }
-    }
-}
-
 @Composable
 fun DropdownMenuItem(
     onClick: () -> Unit,
@@ -196,7 +192,7 @@ fun DrawerMenuScreen(navController: NavController) {
                 modifier = Modifier
                     .size(50.dp)
             )
-            Text("my profile", )
+            Text("my profile")
         }
 
         // Menu items

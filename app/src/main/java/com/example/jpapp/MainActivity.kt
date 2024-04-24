@@ -2,8 +2,11 @@
 
 package com.example.jpapp
 
+import FarmInputsPage
+import ServicesPage
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.compose.material.Text
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -69,6 +72,13 @@ class MainActivity : ComponentActivity() {
                 }
                 composable("support"){
                     SupportScreen(navController)
+                }
+                composable("ServicesPage"){
+                    ServicesPage(navController)
+
+                }
+                composable("FarmInputsPage"){
+                    FarmInputsPage(navController)
                 }
             }
         }

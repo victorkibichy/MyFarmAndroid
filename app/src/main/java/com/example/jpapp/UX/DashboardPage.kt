@@ -24,65 +24,65 @@ import com.example.jpapp.R
 @Composable
 fun DashboardPage(navController: NavController) {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Add a top app bar with red background color and margin
         TopAppBar(
-            title = {
-                Text(text = "Equifarm")
-            },
-            navigationIcon = {
-                // Add an icon button for the drawer menu
-                IconButton(onClick = {
-                    // Handle opening the drawer menu (you can customize this action)
-                    // Example: navController.openDrawer()
-                    navController.navigate("drawerMenu")
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.Menu, // Menu icon
-                        contentDescription = "Menu"
+                title = {
+                    Text(text = "Equifarm")
+                },
+                navigationIcon = {
+                    // Add an icon button for the drawer menu
+                    IconButton(onClick = {
+                        // Handle opening the drawer menu (you can customize this action)
+                        // Example: navController.openDrawer()
+                        navController.navigate("drawerMenu")
+                    }) {
+                        Icon(
+                                imageVector = Icons.Default.Menu, // Menu icon
+                                contentDescription = "Menu"
+                        )
+                    }
+                },
+                actions = {
+                    // Add an icon button for notifications
+                    IconButton(onClick = {
+                        // Handle the notification button click (you can customize this action)
+                        // Example: navController.navigate("notifications")
+                        navController.navigate("notifications")
+                    }) {
+                        Icon(
+                                imageVector = Icons.Default.Notifications, // Notifications icon
+                                contentDescription = "Notifications"
+                        )
+                    }
+                },
+                modifier = Modifier.padding(top = 10.dp),
+                colors = TopAppBarDefaults.run {
+                    return@run topAppBarColors(
+                            Color.Red, Color.White // Red background color
+                            // Text color
                     )
                 }
-            },
-            actions = {
-                // Add an icon button for notifications
-                IconButton(onClick = {
-                    // Handle the notification button click (you can customize this action)
-                    // Example: navController.navigate("notifications")
-                    navController.navigate("notifications")
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.Notifications, // Notifications icon
-                        contentDescription = "Notifications"
-                    )
-                }
-            },
-            modifier = Modifier.padding(top = 10.dp),
-            colors = TopAppBarDefaults.run {
-                return@run topAppBarColors(
-                    Color.Red, Color.White // Red background color
-                    // Text color
-                )
-            }
         )
 
 
         // Add the Grid of Cards
         GridOfCards(navController)
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally
         )
         {
             BottomAppBar(contentColor = Color.Black,)
             {
                 Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
                 )
                 {
                     // Put your content here, like buttons or icons
@@ -95,8 +95,8 @@ fun DashboardPage(navController: NavController) {
 
                     IconButton(onClick = {}) {
                         Icon(
-                            imageVector = Icons.Default.ShoppingCart,
-                            contentDescription = "ShoppingCart"
+                                imageVector = Icons.Default.ShoppingCart,
+                                contentDescription = "ShoppingCart"
                         )
                     }
 
@@ -118,9 +118,9 @@ fun DashboardPage(navController: NavController) {
 @Composable
 fun GridOfCards(navController: NavController) {
     val cardTitles = listOf(
-        "My Farm", "Farm Tech", "Training",
-        "Farm Inputs", "Services", "Transport",
-        "Produce", "Insurance", "Support"
+            "My Farm", "Farm Tech", "Training",
+            "Farm Inputs", "Services", "Transport",
+            "Produce", "Insurance", "Support"
     )
     val cardImages = listOf(
             R.drawable.myfarm, R.drawable.farm_tech, R.drawable.training,
@@ -129,20 +129,20 @@ fun GridOfCards(navController: NavController) {
     )
 
     Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
     ) {
         repeat(3) { rowIndex ->
             Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth()
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    modifier = Modifier.fillMaxWidth()
             ) {
                 repeat(3) { columnIndex ->
                     val cardIndex = rowIndex * 3 + columnIndex
                     DashboardCard(
-                        title = cardTitles[cardIndex],
-                        imageResource = cardImages[cardIndex],
-                        navController = navController,
+                            title = cardTitles[cardIndex],
+                            imageResource = cardImages[cardIndex],
+                            navController = navController,
                     )
                 }
             }
@@ -154,39 +154,39 @@ fun GridOfCards(navController: NavController) {
 @Composable
 fun DashboardCard(title: String, navController: NavController, imageResource: Int) {
     Card(
-        modifier = Modifier
-            .padding(8.dp)
-            .width(90.dp)
-            .height(90.dp),
-        onClick = {
-            when (title) {
-                "My Farm" -> navController.navigate("survey123_login")
-                "Produce" -> navController.navigate("my_market")
-                "Farm Tech" -> navController.navigate("FarmTechPage")
-                "Support" -> navController.navigate("support")
-                "Services" -> navController.navigate("ServicesPage")
-                "Farm Inputs" -> navController.navigate("FarmInputsPage")
-                "List Icon" -> navController.navigate("MarketPlace")
+            modifier = Modifier
+                .padding(8.dp)
+                .width(90.dp)
+                .height(90.dp),
+            onClick = {
+                when (title) {
+                    "My Farm" -> navController.navigate("survey123_login")
+                    "Produce" -> navController.navigate("my_market")
+                    "Farm Tech" -> navController.navigate("FarmTechPage")
+                    "Support" -> navController.navigate("support")
+                    "Services" -> navController.navigate("ServicesPage")
+                    "Farm Inputs" -> navController.navigate("FarmInputsPage")
+                    "List Icon" -> navController.navigate("MarketPlace")
+                }
             }
-        }
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = title,
-                style = MaterialTheme.typography.bodyMedium,
-                color = Color.Black // Set text color to black
+                    text = title,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.Black // Set text color to black
             )
             Spacer(modifier = Modifier.height(8.dp))
             Image(
-                painter = painterResource(id = imageResource),
-                contentDescription = null,
-                modifier = Modifier
-                    .width(120.dp)
-                    .height(120.dp)
+                    painter = painterResource(id = imageResource),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .width(120.dp)
+                        .height(120.dp)
             )
         }
     }

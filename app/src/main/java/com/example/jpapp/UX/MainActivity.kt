@@ -1,3 +1,4 @@
+
 @file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.example.jpapp.UX
@@ -125,13 +126,13 @@ fun UsernameField() {
 @Composable
 fun PasswordField() {
     TextField(
-        value = "",
-        onValueChange = { },
-        label = { Text("Password") },
-        modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-        keyboardActions = KeyboardActions(onDone = { /* Handle action here */ }),
-        colors = TextFieldDefaults.colors()
+            value = "",
+            onValueChange = { },
+            label = { Text("Password") },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(onDone = { /* Handle action here */ }),
+            colors = TextFieldDefaults.colors()
     )
 
 }
@@ -180,26 +181,26 @@ fun TaskItem(text: String) {
 @Composable
 fun DrawerMenuScreen(navController: NavController) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(50.dp)
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(50.dp)
 
     ) {
         // Title with profile icon
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.clickable {
-                // Handle profile click action (you can customize this action)
-                // Example: navController.navigate("update_profile")
-                navController.navigate("update_profile")
-            }
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.clickable {
+                    // Handle profile click action (you can customize this action)
+                    // Example: navController.navigate("update_profile")
+                    navController.navigate("update_profile")
+                }
         ) {
             Icon(
                     painter = painterResource(id = R.drawable.profile_icon),
                     contentDescription = "Update Profile",
                     modifier = Modifier
-                    .size(50.dp)
+                        .size(50.dp)
             )
             Text("my profile")
         }
@@ -227,9 +228,9 @@ fun DrawerMenuScreen(navController: NavController) {
 @Composable
 fun DrawerMenuItem(text: String, onClick: () -> Unit) {
     Text(
-        text = text,
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.clickable(onClick = onClick)
+            text = text,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.clickable(onClick = onClick)
     )
 }

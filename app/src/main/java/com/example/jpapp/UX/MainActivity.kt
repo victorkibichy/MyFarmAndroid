@@ -1,10 +1,9 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.example.jpapp
+package com.example.jpapp.UX
 
 //noinspection UsingMaterialAndMaterial3Libraries
-import FarmInputsPage
-import ServicesPage
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,6 +26,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,15 +39,24 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.jpapp.ApiService
+import com.example.jpapp.R
+import com.example.jpapp.network.RetrofitClient
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            NavHost(navController, startDestination = "login") {
-                composable("login") {
-                    LoginPage(navController = navController)
+            val apiService = RetrofitClient.instance
+
+            NavHost(navController, startDestination = "SplashScreen") {
+                composable("SplashScreen"){
+                    SplashScreen(navController)
+                }
+
+                composable("sign in") {
+                    LoginPage(navController = navController,apiService= apiService)
                 }
                 composable("registration") {
                     RegistrationPage(onBackPressed = { navController.popBackStack() })
@@ -187,9 +196,9 @@ fun DrawerMenuScreen(navController: NavController) {
             }
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.profile_icon),
-                contentDescription = "Update Profile",
-                modifier = Modifier
+                    painter = painterResource(id = R.drawable.profile_icon),
+                    contentDescription = "Update Profile",
+                    modifier = Modifier
                     .size(50.dp)
             )
             Text("my profile")

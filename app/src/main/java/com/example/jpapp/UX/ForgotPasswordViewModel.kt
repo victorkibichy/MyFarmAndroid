@@ -1,4 +1,4 @@
-package com.example.jpapp
+package com.example.jpapp.UX
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

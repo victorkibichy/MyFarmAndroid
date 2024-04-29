@@ -1,4 +1,4 @@
-package com.example.jpapp
+package com.example.jpapp.UX
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable

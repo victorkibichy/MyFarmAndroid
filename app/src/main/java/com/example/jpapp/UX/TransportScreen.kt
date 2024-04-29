@@ -1,4 +1,4 @@
-package com.example.jpapp
+package com.example.jpapp.UX
 
     import androidx.compose.foundation.layout.*
     import androidx.compose.material.*

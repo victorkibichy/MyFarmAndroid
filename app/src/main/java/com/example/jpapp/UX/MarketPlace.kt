@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.example.jpapp
+package com.example.jpapp.UX
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.layout.ContentScale
 import androidx.navigation.NavHostController
+import com.example.jpapp.R
 
 
 @Composable

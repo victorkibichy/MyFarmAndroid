@@ -1,4 +1,4 @@
-package com.example.jpapp
+package com.example.jpapp.UX
 
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.Image

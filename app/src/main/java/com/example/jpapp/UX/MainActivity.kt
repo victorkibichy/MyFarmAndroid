@@ -1,10 +1,8 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.example.jpapp
+package com.example.jpapp.UX
 
 //noinspection UsingMaterialAndMaterial3Libraries
-import FarmInputsPage
-import ServicesPage
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -39,6 +37,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.jpapp.R
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

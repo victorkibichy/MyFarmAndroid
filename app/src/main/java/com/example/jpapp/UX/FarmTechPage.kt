@@ -1,4 +1,4 @@
-package com.example.jpapp
+package com.example.jpapp.UX
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -9,8 +9,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.jpapp.R
 
-    sealed class Tab {
+sealed class Tab {
         data class Machineries(val navController: NavController) : Tab()
         data class Tools(val navController: NavController) : Tab()
     }

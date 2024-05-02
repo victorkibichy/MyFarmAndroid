@@ -1,4 +1,4 @@
-package com.example.jpapp
+package com.example.jpapp.UX
 
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -8,8 +8,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jpapp.R
 
-    @Composable
+@Composable
     fun NavController.MachineriesTabContent() {
         val machineryImages = listOf(
             R.drawable.farm_image_1,

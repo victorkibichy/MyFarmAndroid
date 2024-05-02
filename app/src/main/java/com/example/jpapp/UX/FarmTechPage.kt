@@ -31,8 +31,8 @@ sealed class Tab {
                         navigationIcon = {
                             IconButton(onClick = { navController.navigateUp() }) {
                                 Icon(
-                                    painter = painterResource(id = R.drawable.ic_arrow_back_foreground),
-                                    contentDescription = "Back to Dashboard"
+                                        painter = painterResource(id = R.drawable.ic_arrow_back_foreground),
+                                        contentDescription = "Back to Dashboard"
                                 )
                             }
                         },
@@ -49,18 +49,18 @@ sealed class Tab {
                             .padding(16.dp)
                     ) {
                         TabRow(
-                            selectedTabIndex = if (selectedTab is Tab.Machineries) 0 else 1,
-                            modifier = Modifier.padding(bottom = 16.dp)
+                                selectedTabIndex = if (selectedTab is Tab.Machineries) 0 else 1,
+                                modifier = Modifier.padding(bottom = 16.dp)
                         ) {
                             Tab(
-                                selected = selectedTab is Tab.Machineries,
-                                onClick = { selectedTab = Tab.Machineries(navController) }
+                                    selected = selectedTab is Tab.Machineries,
+                                    onClick = { selectedTab = Tab.Machineries(navController) }
                             ) {
                                 Text(text = "Machineries")
                             }
                             Tab(
-                                selected = selectedTab is Tab.Tools,
-                                onClick = { selectedTab = Tab.Tools(navController) }
+                                    selected = selectedTab is Tab.Tools,
+                                    onClick = { selectedTab = Tab.Tools(navController) }
                             ) {
                                 Text(text = "Tools")
                             }

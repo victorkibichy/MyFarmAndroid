@@ -13,8 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jpapp.R
 
-    @Composable
+@Composable
     fun LoginForgotPasswordPage(navController: NavController, isResettingPassword: Boolean = false) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -22,9 +23,9 @@ import androidx.navigation.NavController
             verticalArrangement = Arrangement.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.equitylogo),
-                contentDescription = null,
-                modifier = Modifier.padding(vertical = 16.dp)
+                    painter = painterResource(id = R.drawable.equitylogo),
+                    contentDescription = null,
+                    modifier = Modifier.padding(vertical = 16.dp)
             )
             UsernameField()
             Spacer(modifier = Modifier.height(16.dp))

@@ -1,4 +1,4 @@
-package com.example.jpapp
+package com.example.jpapp.UX
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jpapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -122,9 +123,9 @@ fun GridOfCards(navController: NavController) {
         "Produce", "Insurance", "Support"
     )
     val cardImages = listOf(
-        R.drawable.myfarm, R.drawable.farm_tech, R.drawable.training,
-        R.drawable.farm_inputs, R.drawable.services, R.drawable.transport,
-        R.drawable.produce, R.drawable.insurance, R.drawable.support
+            R.drawable.myfarm, R.drawable.farm_tech, R.drawable.training,
+            R.drawable.farm_inputs, R.drawable.services, R.drawable.transport,
+            R.drawable.produce, R.drawable.insurance, R.drawable.support
     )
 
     Column(

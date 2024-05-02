@@ -26,8 +26,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jpapp.R
 
-    @Composable
+@Composable
     fun CreatePasswordScreen(navController: NavController) {
         val newPassword = remember { mutableStateOf(TextFieldValue("")) }
         val confirmPassword = remember { mutableStateOf(TextFieldValue("")) }
@@ -44,9 +45,9 @@ import androidx.navigation.NavController
 
             {
                 Image(
-                    painter = painterResource(id = R.drawable.equitylogo),
-                    contentDescription = "Your Image",
-                    modifier = Modifier
+                        painter = painterResource(id = R.drawable.equitylogo),
+                        contentDescription = "Your Image",
+                        modifier = Modifier
                         .size(200.dp)
                         .padding(bottom = 16.dp) // Add some bottom padding to create space between the image and title
                 )

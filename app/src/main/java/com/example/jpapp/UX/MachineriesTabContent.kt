@@ -13,14 +13,14 @@ import com.example.jpapp.R
 @Composable
     fun NavController.MachineriesTabContent() {
         val machineryImages = listOf(
-            R.drawable.farm_image_1,
-            R.drawable.farm_image_1,
-            R.drawable.farm_image_1,
-            R.drawable.farm_image_1,
-            R.drawable.farm_image_1,
-            R.drawable.farm_image_1,
+                R.drawable.farm_image_1,
+                R.drawable.farm_image_1,
+                R.drawable.farm_image_1,
+                R.drawable.farm_image_1,
+                R.drawable.farm_image_1,
+                R.drawable.farm_image_1,
 
-            )
+                )
         val cartItems = remember { mutableStateListOf<Int>() }
 
         LazyVerticalGrid(
@@ -28,11 +28,11 @@ import com.example.jpapp.R
         ) {
             items(machineryImages) { machineryImage ->
                 MachineryCard(
-                    imageResource = R.drawable.farm_image_1,
-                    machineName = "Tractor",
-                    sellerName = "four farmers ltd",
-                    price = "sh 1000",
-                    availability = "In Stock"
+                        imageResource = R.drawable.farm_image_1,
+                        machineName = "Tractor",
+                        sellerName = "four farmers ltd",
+                        price = "sh 1000",
+                        availability = "In Stock"
                 )
             }
         }

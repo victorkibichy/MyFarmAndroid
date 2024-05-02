@@ -7,17 +7,18 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jpapp.R
 
 
-    @Composable
+@Composable
     fun NavController.ToolsTabContent() {
         val toolImages = listOf(
-            R.drawable.farm_image_2,
-            R.drawable.farm_image_2,
-            R.drawable.farm_image_2,
-            R.drawable.farm_image_2,
-            R.drawable.farm_image_2,
-            R.drawable.farm_image_2,
+                R.drawable.farm_image_2,
+                R.drawable.farm_image_2,
+                R.drawable.farm_image_2,
+                R.drawable.farm_image_2,
+                R.drawable.farm_image_2,
+                R.drawable.farm_image_2,
 
             // Add more tool images here
         )

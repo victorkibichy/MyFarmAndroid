@@ -17,6 +17,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
+import com.example.jpapp.R
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable

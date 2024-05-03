@@ -52,15 +52,15 @@ class MainActivity : ComponentActivity() {
             val apiService = RetrofitClient.instance
 
             NavHost(navController, startDestination = "SplashScreen") {
-                composable("SplashScreen"){
+                composable("SplashScreen") {
                     SplashScreen(navController)
                 }
 
                 composable("sign in") {
-                    LoginPage(navController = navController,apiService= apiService)
+                    LoginPage(navController = navController, apiService = apiService)
                 }
                 composable("registration") {
-                    RegistrationPage(onBackPressed = { navController.popBackStack() })
+                    RegistrationPage(navController)
                 }
                 composable("dashboard") {
                     DashboardPage(navController)
@@ -80,157 +80,161 @@ class MainActivity : ComponentActivity() {
                 composable("forgot_password") {
                     ForgotPasswordScreen(navController)
                 }
-                composable("farmTechPage"){
+                composable("farmTechPage") {
                     FarmTechPage(navController)
                 }
-                composable("create_password"){
+                composable("create_password") {
                     CreatePasswordScreen(navController)
                 }
-                composable("login_page"){
+                composable("login_page") {
                     LoginForgotPasswordPage(navController)
                 }
-                composable("drawerMenu"){
+                composable("drawerMenu") {
                     DrawerMenuScreen(navController)
                 }
-                composable("support"){
+                composable("support") {
                     SupportScreen(navController)
                 }
-                composable("ServicesPage"){
+                composable("ServicesPage") {
                     ServicesPage(navController)
 
                 }
-                composable("FarmInputsPage"){
+                composable("FarmInputsPage") {
                     FarmInputsPage(navController)
                 }
-                composable("MarketPlace"){
+                composable("MarketPlace") {
                     Marketplace(navController)
+                }
+                composable("VerificationPage") {
+                    VerificationPage()
                 }
             }
         }
     }
 
-
-
-}
-@Composable
-fun UsernameField() {
-    TextField(
-            value = "",
-            onValueChange = { },
-            label = { Text("Username") },
-            modifier = Modifier.fillMaxWidth(),
-            colors = TextFieldDefaults.textFieldColors(MaterialTheme.colorScheme.background)
-    )
 }
 
-@Composable
-fun PasswordField() {
-    TextField(
-            value = "",
-            onValueChange = { },
-            label = { Text("Password") },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onDone = { /* Handle action here */ }),
-            colors = TextFieldDefaults.colors()
-    )
-
-}
-@Composable
-fun LoginButton(onClick: () -> Unit) {
-    TextButton(
-            onClick = onClick,
-            modifier = Modifier.fillMaxWidth()
-    ) {
-        Text("Login")
+    @Composable
+    fun UsernameField() {
+        TextField(
+                value = "",
+                onValueChange = { },
+                label = { Text("Username") },
+                modifier = Modifier.fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(MaterialTheme.colorScheme.background)
+        )
     }
-}
 
-@Composable
-fun SignupButton(onSignupClick: () -> Unit, text: String = "Do you have an account? Sign Up") {
-    TextButton(
-            onClick = onSignupClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp),
-            colors = ButtonDefaults.textButtonColors(contentColor = Color.Red)
-    ) {
-        Text(text, color = Color.Red)
+    @Composable
+    fun PasswordField() {
+        TextField(
+                value = "",
+                onValueChange = { },
+                label = { Text("Password") },
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = { /* Handle action here */ }),
+                colors = TextFieldDefaults.colors()
+        )
+
     }
-}
 
-@Composable
-fun DropdownMenuItem(
-    onClick: () -> Unit,
-    text: String,
-    modifier: Modifier = Modifier
-) {
-    Text(
-            text = text,
-            modifier = modifier
-                .fillMaxWidth()
-                .clickable(onClick = onClick)
-                .padding(vertical = 8.dp, horizontal = 16.dp)
-    )
-}
+    @Composable
+    fun LoginButton(onClick: () -> Unit) {
+        TextButton(
+                onClick = onClick,
+                modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Login")
+        }
+    }
 
-@Composable
-fun TaskItem(text: String) {
-    // Placeholder for TaskItem
-}
-@Composable
-fun DrawerMenuScreen(navController: NavController) {
-    Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(50.dp)
+    @Composable
+    fun SignupButton(onSignupClick: () -> Unit, text: String = "Do you have an account? Sign Up") {
+        TextButton(
+                onClick = onSignupClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp),
+                colors = ButtonDefaults.textButtonColors(contentColor = Color.Red)
+        ) {
+            Text(text, color = Color.Red)
+        }
+    }
 
+    @Composable
+    fun DropdownMenuItem(
+        onClick: () -> Unit,
+        text: String,
+        modifier: Modifier = Modifier
     ) {
-        // Title with profile icon
+        Text(
+                text = text,
+                modifier = modifier
+                    .fillMaxWidth()
+                    .clickable(onClick = onClick)
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
+        )
+    }
+
+    @Composable
+    fun TaskItem(text: String) {
+        // Placeholder for TaskItem
+    }
+
+    @Composable
+    fun DrawerMenuScreen(navController: NavController) {
         Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.clickable {
-                    // Handle profile click action (you can customize this action)
-                    // Example: navController.navigate("update_profile")
-                    navController.navigate("update_profile")
-                }
-        ) {
-            Icon(
-                    painter = painterResource(id = R.drawable.profile_icon),
-                    contentDescription = "Update Profile",
-                    modifier = Modifier
-                        .size(50.dp)
-            )
-            Text("my profile")
-        }
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(50.dp)
 
-        // Menu items
-        Spacer(modifier = Modifier.height(32.dp))
-        DrawerMenuItem(text = "Home") {
-            navController.navigate("dashboard")
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        DrawerMenuItem(text = "My Account") {
-            navController.navigate("my_account")
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        DrawerMenuItem(text = "Settings") {
-            navController.navigate("settings")
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        DrawerMenuItem(text = "Logout") {
-            navController.navigate("login")
+        ) {
+            // Title with profile icon
+            Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.clickable {
+                        // Handle profile click action (you can customize this action)
+                        // Example: navController.navigate("update_profile")
+                        navController.navigate("update_profile")
+                    }
+            ) {
+                Icon(
+                        painter = painterResource(id = R.drawable.profile_icon),
+                        contentDescription = "Update Profile",
+                        modifier = Modifier
+                            .size(50.dp)
+                )
+                Text("my profile")
+            }
+
+            // Menu items
+            Spacer(modifier = Modifier.height(32.dp))
+            DrawerMenuItem(text = "Home") {
+                navController.navigate("dashboard")
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            DrawerMenuItem(text = "My Account") {
+                navController.navigate("my_account")
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            DrawerMenuItem(text = "Settings") {
+                navController.navigate("settings")
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            DrawerMenuItem(text = "Logout") {
+                navController.navigate("login")
+            }
         }
     }
-}
 
-@Composable
-fun DrawerMenuItem(text: String, onClick: () -> Unit) {
-    Text(
-            text = text,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.clickable(onClick = onClick)
-    )
-}
+    @Composable
+    fun DrawerMenuItem(text: String, onClick: () -> Unit) {
+        Text(
+                text = text,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable(onClick = onClick)
+        )
+    }

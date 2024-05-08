@@ -38,7 +38,7 @@ fun LoginPage(navController: NavController, apiService: ApiService, isResettingP
     var showDialog by remember { mutableStateOf(false) }
 
     fun performSignin(navController: NavController, apiService: ApiService) {
-        val loginRequest = AuthUser(emailOrNationalId = emailOrNationalId, password = password)
+        val loginRequest = AuthUser( emailOrNationalId = emailOrNationalId, password = password)
         apiService.signin(loginRequest).enqueue(object : Callback<EntityResponse<AuthUser>> {
             override fun onResponse(
                 call: Call<EntityResponse<AuthUser>>,

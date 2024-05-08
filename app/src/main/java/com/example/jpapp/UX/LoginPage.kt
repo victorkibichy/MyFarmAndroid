@@ -4,8 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,7 +24,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.jpapp.ApiService
 import com.example.jpapp.R
-import com.example.jpapp.data.AuthUser
+import com.example.jpapp.data.AuthUserRequest
+import com.example.jpapp.data.AuthUserResponse
 import com.example.jpapp.network.EntityResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,11 +36,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 @Composable
-fun LoginPage(
-    navController: NavController,
-    apiService: ApiService,
-    isResettingPassword: Boolean = false
-) {
+fun LoginPage(navController: NavController, apiService: ApiService,
+    isResettingPassword: Boolean = false) {
     val maroon = Color(0xFF800000)
 
     var emailOrNationalId by remember { mutableStateOf(TextFieldValue()) }
@@ -61,15 +57,15 @@ fun LoginPage(
         }
 
         isLoading = true
-        val loginRequest = AuthUser(
-                emailOrNationalId = emailOrNationalId.text,
-                password = password.text
+        val loginRequest = AuthUserRequest(
+        emailOrNationalId = emailOrNationalId.text,
+        password = password.text
         )
 
-        apiService.signin(loginRequest).enqueue(object : Callback<EntityResponse<AuthUser>> {
+        apiService.signin(loginRequest).enqueue(object : Callback<EntityResponse<AuthUserResponse>> {
             override fun onResponse(
-                call: Call<EntityResponse<AuthUser>>,
-                response: Response<EntityResponse<AuthUser>>
+                call: Call<EntityResponse<AuthUserResponse>>,
+                response: Response<EntityResponse<AuthUserResponse>>
             ) {
                 isLoading = false
                 if (response.isSuccessful) {
@@ -88,10 +84,11 @@ fun LoginPage(
                 }
             }
 
-            override fun onFailure(call: Call<EntityResponse<AuthUser>>, t: Throwable) {
+
+
+            override fun onFailure(p0: Call<EntityResponse<AuthUserResponse>>, p1: Throwable) {
                 isLoading = false
-                errorMessage = "Network failure: ${t.message}"
-            }
+                errorMessage = "Network failure: ${p1.message}"            }
         })
     }
 
@@ -239,18 +236,6 @@ fun LoginPage(
             CircularProgressIndicator()
         }
 
-        // Dialog for showing error
-        if (showDialog) {
-            AlertDialog(
-                    onDismissRequest = { showDialog = false },
-                    title = { Text("Error") },
-                    text = { Text(errorMessage ?: "") },
-                    confirmButton = {
-                        Button(onClick = { showDialog = false }) {
-                            Text("OK")
-                        }
-                    }
-            )
-        }
+
     }
 }

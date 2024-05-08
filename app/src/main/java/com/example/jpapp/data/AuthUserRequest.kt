@@ -1,6 +1,6 @@
 package com.example.jpapp.data
 
-data class AuthUser (
+data class  AuthUserRequest (
 val emailOrNationalId:String,
 val  password:String,
 )

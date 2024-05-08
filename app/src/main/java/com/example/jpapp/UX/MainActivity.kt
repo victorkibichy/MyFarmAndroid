@@ -5,6 +5,7 @@ package com.example.jpapp.UX
 
 //noinspection UsingMaterialAndMaterial3Libraries
 
+import VerificationPage
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -60,7 +61,7 @@ class MainActivity : ComponentActivity() {
                     LoginPage(navController = navController, apiService = apiService)
                 }
                 composable("registration") {
-                    RegistrationPage(navController)
+                    RegistrationPage(navController = navController, apiService = apiService)
                 }
                 composable("dashboard") {
                     DashboardPage(navController)
@@ -106,7 +107,7 @@ class MainActivity : ComponentActivity() {
                     Marketplace(navController)
                 }
                 composable("VerificationPage") {
-                    VerificationPage()
+                    VerificationPage(navController)
                 }
             }
         }

@@ -198,23 +198,24 @@ fun LoginPage(navController: NavController, apiService: ApiService,
                     }
         )
         Spacer(modifier = Modifier.height(20.dp))
-        Text(
-                text = buildAnnotatedString {
-                    append("Don't have an account? ")
-                    withStyle(
-                            style = SpanStyle(
-                                    color = maroon, // Set the color to maroon
-                                    fontWeight = FontWeight.Bold
-                            )
-                    ) {
-                        append("Sign up")
+        Row {
+            Text(
+                    text = buildAnnotatedString {
+                        append("Don't have an account? ")
                     }
-                },
-                modifier = Modifier.clickable {
-                    // Handle click for the "Sign up" portion
-                    navController.navigate("registration")
-                }
-        )
+            )
+            Text(
+                    text = buildAnnotatedString {
+
+                        append("Sign up")
+
+                    },
+                    modifier = Modifier.clickable {
+                        // Handle click for the "Sign up" portion
+                        navController.navigate("registration")
+                    })
+        }
+
 
         Spacer(modifier = Modifier.height(20.dp))
         Text(

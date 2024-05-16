@@ -27,6 +27,7 @@ import com.example.jpapp.R
 import com.example.jpapp.data.AuthUserRequest
 import com.example.jpapp.data.AuthUserResponse
 import com.example.jpapp.network.EntityResponse
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -144,9 +145,9 @@ fun LoginPage(navController: NavController, apiService: ApiService,
         )
         Spacer(modifier = Modifier.height(10.dp))
         errorMessage?.let {
-            Text(
+               Text(
                 text = it,
-                color = Color.Red,
+                colorhh  = Color.Red,
                 modifier = Modifier.padding(vertical = 5.dp)
             )
         }
@@ -212,6 +213,7 @@ fun LoginPage(navController: NavController, apiService: ApiService,
             },
             modifier = Modifier.clickable {
                 // Handle click for the "Sign up" portion
+                createNode()
                 navController.navigate("registration")
             }
         )
@@ -238,4 +240,10 @@ fun LoginPage(navController: NavController, apiService: ApiService,
 
 
     }
+}
+
+fun createNode(){
+
+    val db = FirebaseDatabase.getInstance().reference
+    db.child("users").push().setValue("Gilbert korir")
 }

@@ -3,6 +3,8 @@ import com.example.jpapp.data.AuthUserRequest
 import com.example.jpapp.data.AuthUserResponse
 import com.example.jpapp.data.RegistrationRequest
 import com.example.jpapp.data.RegistrationResponse
+
+
 import com.example.jpapp.network.EntityResponse
 import retrofit2.Call
 import retrofit2.http.Body

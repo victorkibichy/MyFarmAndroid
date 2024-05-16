@@ -39,14 +39,13 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.toUpperCase
 import com.example.jpapp.data.RegistrationRequest
 import com.example.jpapp.data.RegistrationResponse
-import com.example.jpapp.data.Role
 import com.example.jpapp.data.CountryCode
 import com.example.jpapp.data.countryCodes
-import com.example.jpapp.data.roles
-import java.util.Locale
+
+
+
 
 
 @Composable
@@ -61,7 +60,7 @@ fun RegistrationPage(navController: NavController, apiService: ApiService,
     var email by remember { mutableStateOf(TextFieldValue()) }
     var phoneNo by remember { mutableStateOf(TextFieldValue()) }
 
-    var selectedRole by remember { mutableStateOf<Role?>(roles["Select Role"]) }
+    var selectedRole by remember { mutableStateOf("Select Role") }
     var password by remember { mutableStateOf(TextFieldValue()) }
     var confirmPassword by remember { mutableStateOf(TextFieldValue()) }
     var termsAndConditionsChecked by remember { mutableStateOf(false) }
@@ -124,48 +123,38 @@ fun RegistrationPage(navController: NavController, apiService: ApiService,
                 password = password.text
         )
 
-        // Assuming apiService is correctly configured
-        apiService.register(registrationRequest)
-            .enqueue(object : Callback<EntityResponse<RegistrationResponse>> {
+        apiService.register(registrationRequest).enqueue(object : Callback< EntityResponse<RegistrationResponse>> {
+            override fun onResponse(call: Call< EntityResponse<RegistrationResponse>>,
+                                    response: Response<EntityResponse <RegistrationResponse>>) {
 
-                override fun onResponse(
-                    call: Call<EntityResponse<RegistrationResponse>>,
-                    response: Response<EntityResponse<RegistrationResponse>>
-                ) {
-                    println("registering user")
-                    isLoading = false
-                    if (response.isSuccessful) {
-                        println("sign up sucessful")
-                        val entityResponse = response.body()
-                        if (entityResponse != null && entityResponse.message == "Sign up successful") {
-                            registrationMessage = "Sign up successful"
-                            CoroutineScope(Dispatchers.Main).launch {
-                                delay(2000) // 2 seconds delay
-                                navController.navigate("VerificationPage")
-                                println("entity....." + entityResponse)
-                            }
-                        } else {
-                            // Show error message based on the response
-                            errorMessage = entityResponse?.message ?: "Unknown error occurred."
+                if (response.isSuccessful) {
+                    val entityResponse = response.body()
+                    if (entityResponse != null && entityResponse.message == "Sign up successful") {
+                        registrationMessage = "Sign up successful"
+                        CoroutineScope(Dispatchers.Main).launch {
+                            delay(2000) // 2 seconds delay
+                            navController.navigate("VerificationPage")
+                            //println("entity....." + entityResponse)
                         }
                     } else {
-                        // Show error message based on the response code
-                        errorMessage = "Failed to register. Please try again later."
-                        print(errorMessage)
-                        var entity = response.body()
-                        println(entity)
+                        // Show error message based on the response
+                        errorMessage = entityResponse?.message ?: "Unknown error occurred."
                     }
-                }
+                } else {
+                    // Show error message based on the response code
+                    errorMessage = response.toString()
+                    print(errorMessage)
+                    var entity = response.body()
+                    println(entity)
 
-                override fun onFailure(
-                    call: Call<EntityResponse<RegistrationResponse>>,
-                    t: Throwable
-                ) {
-                    isLoading = false
-                    // Show error message indicating network failure
-                    errorMessage = "Network failure: ${t.message}"
                 }
-            })
+            }
+
+            override fun onFailure(p0: Call<EntityResponse<RegistrationResponse>>, t: Throwable) {
+                errorMessage = t.message ?: "Unknown error occurred."
+
+            }
+        })
     }
 
     LazyColumn(
@@ -307,27 +296,16 @@ fun RegistrationPage(navController: NavController, apiService: ApiService,
                             .padding(horizontal = 16.dp)
                 ) {
                     var expandedRole by remember { mutableStateOf(false) }
-                    if (expandedRole) {
-                        DropdownMenu(
-                                expanded = expandedRole,
-                                onDismissRequest = { expandedRole = false },
-                                modifier = Modifier.fillMaxWidth()
-                        ) {
-                            // Displaying roles
-                            roles.values.forEach { role ->
-                                DropdownMenuItem(
-                                        onClick = {
-                                            selectedRole = role
-                                            expandedRole = false
-                                        },
-                                        text = role.displayName
-                                )
-                            }
-                        }
-                    }
+                    val roles = listOf(
+                            "FARMER",
+                            "BUYER",
+                            "AGRO DEALER",
+                            "SERVICE PROVIDER",
+                            "TRANSPORTER  "
+                    )
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        selectedRole?.let { Text(it.value, Modifier.weight(1f)) }
+                        Text(selectedRole, Modifier.weight(1f))
                         Icon(
                                 imageVector = Icons.Default.ArrowDropDown,
                                 contentDescription = "Dropdown Icon",
@@ -349,15 +327,16 @@ fun RegistrationPage(navController: NavController, apiService: ApiService,
                             roles.forEach { role ->
                                 DropdownMenuItem(
                                         onClick = {
-                                            selectedRole = role.value
+                                            selectedRole = role
                                             expandedRole = false
                                         },
-                                        text = role.key
+                                        text = role
                                 )
                             }
                         }
                     }
                 }
+
                 Spacer(modifier = Modifier.height(16.dp))
                 TextField(
                         value = password,

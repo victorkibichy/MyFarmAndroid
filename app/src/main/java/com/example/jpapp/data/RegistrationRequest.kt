@@ -1,6 +1,8 @@
 package com.example.jpapp.data
 
- data class RegistrationRequest(
+import androidx.compose.ui.semantics.Role
+
+data class RegistrationRequest(
      val password: String?,
      val role: String?,
      val phoneNo: String?,

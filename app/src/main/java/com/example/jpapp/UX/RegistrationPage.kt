@@ -1,33 +1,12 @@
 package com.example.jpapp.UX
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.Icon
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,7 +14,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
@@ -44,8 +22,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.jpapp.ApiService
 import com.example.jpapp.R
-import com.example.jpapp.data.RegistrationRequest
-import com.example.jpapp.data.RegistrationResponse
 import com.example.jpapp.network.EntityResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,10 +30,27 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.Icon
+import androidx.compose.ui.text.input.ImeAction
+import com.example.jpapp.data.RegistrationRequest
+import com.example.jpapp.data.RegistrationResponse
+import com.example.jpapp.data.CountryCode
+import com.example.jpapp.data.countryCodes
+
+
+
 
 
 @Composable
-fun RegistrationPage(navController: NavController, apiService: ApiService) {
+fun RegistrationPage(navController: NavController, apiService: ApiService,
+                     isResettingPassword: Boolean = false) {
 
     val maroon = Color(0xFF800000)
 
@@ -73,51 +66,51 @@ fun RegistrationPage(navController: NavController, apiService: ApiService) {
     var termsAndConditionsChecked by remember { mutableStateOf(false) }
     var isLoading by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
-    var selectedCountryCode by remember { mutableStateOf("Select Country Code") }
+    var selectedCountryCode by remember { mutableStateOf<CountryCode?>(countryCodes["Country"]) }
     var registrationMessage by remember { mutableStateOf<String?>(null) }
-    var showDialog b   by remember { mutableStateOf(false) }
+    var showDialog by remember { mutableStateOf(false) }
+
 
     fun isValidEmail(email: String): Boolean {
         val emailRegex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$")
         return emailRegex.matches(email)
     }
 
-    fun performRegistration() {
-        // Perform validation checks
+    // Assuming this code is part of a ViewModel or similar component
 
+    fun registerUser() {
         if (firstName.text.isEmpty() || lastName.text.isEmpty() || nationalId.text.isEmpty() ||
-            email.text.isEmpty() || phoneNo.text.isEmpty() || selectedCountryCode.isEmpty() ||
-            selectedRole.isEmpty() || password.text.isEmpty() || confirmPassword.text.isEmpty()
+            email.text.isEmpty() || phoneNo.text.isEmpty() || password.text.isEmpty() || confirmPassword.text.isEmpty()
         ) {
-            // Show error message indicating required fields are missing
-            println("my number: "+phoneNo.text)
-
+            println("my number: " + phoneNo.text)
+            println("fist name: " + phoneNo.text)
             showDialog = true
             errorMessage = "Please fill in all the required fields."
             return
         }
 
         if (!isValidEmail(email.text)) {
-            // Show error message indicating invalid email format
+            showDialog = true
             errorMessage = "Invalid email format."
+            println(errorMessage)
             return
         }
 
         if (password.text != confirmPassword.text) {
-            // Show error message indicating passwords don't match
+            showDialog = true
             errorMessage = "Passwords do not match."
+            println(errorMessage)
             return
         }
 
         if (!termsAndConditionsChecked) {
-            // Show error message indicating terms and conditions must be accepted
+            showDialog = true
             errorMessage = "Please accept the terms and conditions."
+            println(errorMessage)
             return
         }
 
         // If all validation checks pass, proceed with registration
-        // Make API call to register user using the provided information
-        // Display loading indicator while waiting for response
         isLoading = true
 
         val registrationRequest = RegistrationRequest(
@@ -126,25 +119,22 @@ fun RegistrationPage(navController: NavController, apiService: ApiService) {
             nationalId = nationalId.text,
             email = email.text,
             phoneNo = phoneNo.text,
-            //countryCode = selectedCountryCode,
             role = selectedRole,
             password = password.text
         )
 
-        apiService.register(registrationRequest).enqueue(object : Callback<EntityResponse<RegistrationResponse>> {
-            override fun onResponse(
-                call: Call<EntityResponse<RegistrationResponse>>,
-                response: Response<EntityResponse<RegistrationResponse>>
-            ) {
-                isLoading = false
+        apiService.register(registrationRequest).enqueue(object : Callback< EntityResponse<RegistrationResponse>> {
+            override fun onResponse(call: Call< EntityResponse<RegistrationResponse>>,
+                                    response: Response<EntityResponse <RegistrationResponse>>) {
+
                 if (response.isSuccessful) {
                     val entityResponse = response.body()
-                    if (entityResponse != null && entityResponse.message== "Sign up successfull") {
-                        // Navigate only if registration is successful
+                    if (entityResponse != null && entityResponse.message == "Sign up successful") {
                         registrationMessage = "Sign up successful"
                         CoroutineScope(Dispatchers.Main).launch {
-                            delay(2000) // 3 seconds delay
+                            delay(2000) // 2 seconds delay
                             navController.navigate("VerificationPage")
+                            //println("entity....." + entityResponse)
                         }
                     } else {
                         // Show error message based on the response
@@ -152,21 +142,20 @@ fun RegistrationPage(navController: NavController, apiService: ApiService) {
                     }
                 } else {
                     // Show error message based on the response code
-                    errorMessage = "Failed to register. Please try again later."
+                    errorMessage = response.toString()
+                    print(errorMessage)
+                    var entity = response.body()
+                    println(entity)
+
                 }
             }
 
-            override fun onFailure(
-                call: Call< <RegistrationResponse>>,
-                t: Throwable
-            ) {
-                isLoading = false
-                // Show error message indicating network failure
-                errorMessage = "Network failure: ${t.message}"
+            override fun onFailure(p0: Call<EntityResponse<RegistrationResponse>>, t: Throwable) {
+                errorMessage = t.message ?: "Unknown error occurred."
+
             }
         })
     }
-
 
     LazyColumn(
         modifier = Modifier.fillMaxSize()
@@ -219,7 +208,7 @@ fun RegistrationPage(navController: NavController, apiService: ApiService) {
                 TextField(
                     value = nationalId,
                     onValueChange = { nationalId = it },
-                    label = { Text("National ID") },
+                    label = { Text("NationalId") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
@@ -241,28 +230,33 @@ fun RegistrationPage(navController: NavController, apiService: ApiService) {
                         .padding(horizontal = 16.dp)
                 ) {
                     var expandedCountryCode by remember { mutableStateOf(false) }
-                    var selectedCountryCode by remember { mutableStateOf("Select Country Code") }
-                    val countryCodes = listOf(
-                        "USA (+1)",
-                        "Kenya (+254)",
-                        "Canada (+1)",
-                        "UK (+44)",
-                        "Australia (+61)",
-                        "Germany (+49)"
-                    )
-
-
-
+                    var selectedCountryCode by remember { mutableStateOf<CountryCode?>(null) }
+                    if (expandedCountryCode) {
+                        DropdownMenu(
+                            expanded = expandedCountryCode,
+                            onDismissRequest = { expandedCountryCode = false },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            // Displaying country codes
+                            countryCodes.values.forEach { countryCode ->
+                                DropdownMenuItem(
+                                    onClick = {
+                                        selectedCountryCode = countryCode
+                                        expandedCountryCode = false
+                                    },
+                                    text = countryCode.displayName
+                                )
+                            }
+                        }
+                    }
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(selectedCountryCode, Modifier.weight(1f))
+                        selectedCountryCode?.let { Text(it.code, Modifier.weight(1f)) }
                         TextField(
                             value = phoneNo,
                             onValueChange = { phoneNo = it },
                             modifier = Modifier.weight(1f)
                         )
-
-
 
                         Icon(
                             imageVector = Icons.Default.ArrowDropDown,
@@ -285,10 +279,10 @@ fun RegistrationPage(navController: NavController, apiService: ApiService) {
                             countryCodes.forEach { countryCode ->
                                 DropdownMenuItem(
                                     onClick = {
-                                        selectedCountryCode = countryCode
+                                        selectedCountryCode = countryCode.value
                                         expandedCountryCode = false
                                     },
-                                    text = countryCode
+                                    text = countryCode.key
                                 )
                             }
                         }
@@ -341,7 +335,8 @@ fun RegistrationPage(navController: NavController, apiService: ApiService) {
                             }
                         }
                     }
-                  }
+                }
+
                 Spacer(modifier = Modifier.height(16.dp))
                 TextField(
                     value = password,
@@ -364,6 +359,14 @@ fun RegistrationPage(navController: NavController, apiService: ApiService) {
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
                 )
+                errorMessage?.let {
+                    Text(
+                        text = it,
+                        color = Color.Red,
+                        modifier = Modifier.padding(vertical = 5.dp)
+
+                    )
+                }
                 Spacer(modifier = Modifier.height(16.dp))
                 // Checkbox for terms and policy
                 Row(
@@ -388,19 +391,29 @@ fun RegistrationPage(navController: NavController, apiService: ApiService) {
                         .width(300.dp)
                         .height(50.dp)
                         .background(color = Color.LightGray)
-
+                        .clickable { registerUser() }
                 ) {
                     Text(
                         text = "Sign up",
                         color = maroon,
                         fontSize = 20.sp,
                         style = MaterialTheme.typography.displayMedium,
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .clickable(onClick = ::performRegistration)
-
+                        modifier = Modifier.align(Alignment.Center)
                     )
                 }
+                registrationMessage?.let {
+                    Text(
+                        text = it,
+                        color = Color.Green,
+                        modifier = Modifier.padding(vertical = 5.dp)
+                    )
+                }
+                if (isLoading) {
+                    CircularProgressIndicator()
+                }
+
+
+
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = buildAnnotatedString {
@@ -415,8 +428,10 @@ fun RegistrationPage(navController: NavController, apiService: ApiService) {
                     },
                     modifier = Modifier.clickable { navController.navigate("sign in") }
                 )
+
+
             }
         }
+
     }
 }
-

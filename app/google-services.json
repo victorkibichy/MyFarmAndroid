@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1060826509532",
+    "project_id": "jpapp-282de",
+    "storage_bucket": "jpapp-282de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060826509532:android:947c2447c81765aee14419",
+        "android_client_info": {
+          "package_name": "com.example.jpapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFzDGhBqPsYLMBkwK362pUMriZ0TiIB4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

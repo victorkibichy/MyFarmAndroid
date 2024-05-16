@@ -1,4 +1,7 @@
-package com.example.jpapp
+
+
+package com.example.jpapp.UX
+
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

@@ -1,4 +1,4 @@
-package com.example.jpapp
+package com.example.jpapp.UX
 
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.Image
@@ -37,6 +37,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.jpapp.R
 
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -69,9 +70,9 @@ fun ForgotPasswordScreen(navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.equitylogo),
-                        contentDescription = "Your Image",
-                        modifier = Modifier.size(400.dp) // Adjust size as needed
+                            painter = painterResource(id = R.drawable.equitylogo),
+                            contentDescription = "Your Image",
+                            modifier = Modifier.size(400.dp) // Adjust size as needed
                     )
 
                     Spacer(modifier = Modifier.height(24.dp))
@@ -94,11 +95,11 @@ fun ForgotPasswordScreen(navController: NavController) {
 
                     Spacer(modifier = Modifier.height(24.dp))
                     Button(
-                        onClick = {navController.navigate("login_page")
+                        onClick = {navController.navigate("verificationPage")
                         },
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("Reset Password")
+                        Text("Send instructions")
                     }
                 }
             }

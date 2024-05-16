@@ -1,19 +1,14 @@
-package com.example.jpapp
+package com.example.jpapp.UX
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -27,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.jpapp.R
 import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,9 +47,9 @@ fun MyMarketPage(navController: NavController) {
             // Add an image
             item {
                 Image(
-                    painter = painterResource(id = R.drawable.tomatoes),
-                    contentDescription = null,
-                    modifier = Modifier
+                        painter = painterResource(id = R.drawable.tomatoes),
+                        contentDescription = null,
+                        modifier = Modifier
                         .padding(vertical = 60.dp)
                         .size(400.dp)
           )

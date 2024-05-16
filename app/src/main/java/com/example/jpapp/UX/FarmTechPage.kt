@@ -1,4 +1,4 @@
-package com.example.jpapp
+package com.example.jpapp.UX
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -9,8 +9,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.jpapp.R
 
-    sealed class Tab {
+sealed class Tab {
         data class Machineries(val navController: NavController) : Tab()
         data class Tools(val navController: NavController) : Tab()
     }
@@ -30,8 +31,8 @@ import androidx.navigation.compose.rememberNavController
                         navigationIcon = {
                             IconButton(onClick = { navController.navigateUp() }) {
                                 Icon(
-                                    painter = painterResource(id = R.drawable.ic_arrow_back_foreground),
-                                    contentDescription = "Back to Dashboard"
+                                        painter = painterResource(id = R.drawable.ic_arrow_back_foreground),
+                                        contentDescription = "Back to Dashboard"
                                 )
                             }
                         },
@@ -48,18 +49,18 @@ import androidx.navigation.compose.rememberNavController
                             .padding(16.dp)
                     ) {
                         TabRow(
-                            selectedTabIndex = if (selectedTab is Tab.Machineries) 0 else 1,
-                            modifier = Modifier.padding(bottom = 16.dp)
+                                selectedTabIndex = if (selectedTab is Tab.Machineries) 0 else 1,
+                                modifier = Modifier.padding(bottom = 16.dp)
                         ) {
                             Tab(
-                                selected = selectedTab is Tab.Machineries,
-                                onClick = { selectedTab = Tab.Machineries(navController) }
+                                    selected = selectedTab is Tab.Machineries,
+                                    onClick = { selectedTab = Tab.Machineries(navController) }
                             ) {
                                 Text(text = "Machineries")
                             }
                             Tab(
-                                selected = selectedTab is Tab.Tools,
-                                onClick = { selectedTab = Tab.Tools(navController) }
+                                    selected = selectedTab is Tab.Tools,
+                                    onClick = { selectedTab = Tab.Tools(navController) }
                             ) {
                                 Text(text = "Tools")
                             }

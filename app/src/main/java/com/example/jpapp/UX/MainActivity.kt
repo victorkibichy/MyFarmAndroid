@@ -1,10 +1,8 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 
-package com.example.jpapp
 
-//noinspection UsingMaterialAndMaterial3Libraries
-import FarmInputsPage
-import ServicesPage
+@file:OptIn(ExperimentalMaterial3Api::class)
+package com.example.jpapp.UX
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -39,18 +37,30 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.jpapp.R
+import com.example.jpapp.R.VerificationPage
+import com.example.jpapp.network.RetrofitClient
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            NavHost(navController, startDestination = "login") {
-                composable("login") {
-                    LoginPage(navController = navController)
+            val apiService = RetrofitClient.instance
+            val db = FirebaseDatabase.getInstance().reference
+
+            NavHost(navController, startDestination = "SplashScreen") {
+                composable("SplashScreen") {
+                    SplashScreen(navController)
+                }
+
+                composable("sign in") {
+                    LoginPage(navController = navController, apiService = apiService)
                 }
                 composable("registration") {
-                    RegistrationPage(onBackPressed = { navController.popBackStack() })
+                    RegistrationPage(navController = navController, apiService = apiService)
                 }
                 composable("dashboard") {
                     DashboardPage(navController)
@@ -70,46 +80,50 @@ class MainActivity : ComponentActivity() {
                 composable("forgot_password") {
                     ForgotPasswordScreen(navController)
                 }
-                composable("farmTechPage"){
+                composable("farmTechPage") {
                     FarmTechPage(navController)
                 }
-                composable("create_password"){
+                composable("create_password") {
                     CreatePasswordScreen(navController)
                 }
-                composable("login_page"){
+                composable("login_page") {
                     LoginForgotPasswordPage(navController)
                 }
-                composable("drawerMenu"){
+                composable("drawerMenu") {
                     DrawerMenuScreen(navController)
                 }
-                composable("support"){
+                composable("support") {
                     SupportScreen(navController)
                 }
-                composable("ServicesPage"){
+                composable("ServicesPage") {
                     ServicesPage(navController)
 
                 }
-                composable("FarmInputsPage"){
+                composable("FarmInputsPage") {
                     FarmInputsPage(navController)
                 }
-                composable("MarketPlace"){
+
+                composable("MarketPlace") {
                     Marketplace(navController)
+                }
+                composable("VerificationPage") {
+                    VerificationPage(navController)
                 }
             }
         }
     }
 
-
-
 }
+
+
 @Composable
 fun UsernameField() {
     TextField(
-            value = "",
-            onValueChange = { },
-            label = { Text("Username") },
-            modifier = Modifier.fillMaxWidth(),
-            colors = TextFieldDefaults.textFieldColors(MaterialTheme.colorScheme.background)
+        value = "",
+        onValueChange = { },
+        label = { Text("Username") },
+        modifier = Modifier.fillMaxWidth(),
+        colors = TextFieldDefaults.textFieldColors(MaterialTheme.colorScheme.background)
     )
 }
 
@@ -126,11 +140,12 @@ fun PasswordField() {
     )
 
 }
-@Composable
+
+ @Composable
 fun LoginButton(onClick: () -> Unit) {
     TextButton(
-            onClick = onClick,
-            modifier = Modifier.fillMaxWidth()
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth()
     ) {
         Text("Login")
     }
@@ -139,11 +154,11 @@ fun LoginButton(onClick: () -> Unit) {
 @Composable
 fun SignupButton(onSignupClick: () -> Unit, text: String = "Do you have an account? Sign Up") {
     TextButton(
-            onClick = onSignupClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp),
-            colors = ButtonDefaults.textButtonColors(contentColor = Color.Red)
+        onClick = onSignupClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp),
+        colors = ButtonDefaults.textButtonColors(contentColor = Color.Red)
     ) {
         Text(text, color = Color.Red)
     }
@@ -156,11 +171,11 @@ fun DropdownMenuItem(
     modifier: Modifier = Modifier
 ) {
     Text(
-            text = text,
-            modifier = modifier
-                .fillMaxWidth()
-                .clickable(onClick = onClick)
-                .padding(vertical = 8.dp, horizontal = 16.dp)
+        text = text,
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(vertical = 8.dp, horizontal = 16.dp)
     )
 }
 
@@ -168,6 +183,7 @@ fun DropdownMenuItem(
 fun TaskItem(text: String) {
     // Placeholder for TaskItem
 }
+
 @Composable
 fun DrawerMenuScreen(navController: NavController) {
     Column(
